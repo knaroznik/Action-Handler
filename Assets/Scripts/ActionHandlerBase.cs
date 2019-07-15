@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnCollisionEnterHandler2D : MonoBehaviour
+public class ActionHandlerBase : MonoBehaviour, IActionHandler
 {
     public UnityEvent collisionAction;
 
     public bool PlayOnce;
     public bool PlayerCollision;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Invoke(GameObject obj)
     {
         if (PlayerCollision)
         {
-            if (collision.gameObject.tag == "Player")
+            if (obj.tag == "Player")
             {
                 Play();
             }
@@ -25,7 +25,7 @@ public class OnCollisionEnterHandler2D : MonoBehaviour
         }
     }
 
-    private void Play()
+    public  void Play()
     {
         collisionAction.Invoke();
 
